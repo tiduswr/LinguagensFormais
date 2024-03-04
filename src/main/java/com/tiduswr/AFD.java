@@ -25,24 +25,27 @@ public class AFD implements FiniteAutomata{
     }
 
     public boolean process(String input){
-        State currState = initialState;
+        return processRecursive(input, 0, initialState);
+    }
 
-        for(int i = 0; i < input.length(); i++){
-            Symbol symbol = new Symbol(input.charAt(i));
-            Set<State> destinations = table.delta(currState, symbol);
-
-            if(destinations.isEmpty()){
-                log(i, input, currState);
-                log("Transição não definida!");
-                return false;
-            }
-
-            currState = destinations.iterator().next();
-
-            log(i, input, currState);
+    private boolean processRecursive(String input, int index, State currentState) {
+        if (index == input.length()) {
+            return finalStates.contains(currentState);
         }
 
-        return finalStates.contains(currState);
+        Symbol symbol = new Symbol(input.charAt(index));
+        Set<State> destinations = table.delta(currentState, symbol);
+
+        if (destinations.isEmpty()) {
+            log(index, input, currentState);
+            log("Transição não definida!");
+            return false;
+        }
+
+        State nextState = destinations.iterator().next();
+        log(index, input, nextState);
+        
+        return processRecursive(input, index + 1, nextState);
     }
     
 }
