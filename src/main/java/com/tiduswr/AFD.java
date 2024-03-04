@@ -42,13 +42,7 @@ public class AFD implements FiniteAutomata{
             log(i, input, currState);
         }
 
-        if(finalStates.contains(currState)){
-            log("Palavra aceita pelo Automato!");
-            return true;
-        }
-
-        log("Palavra rejeitada pelo Automato!");
-        return false;
+        return finalStates.contains(currState);
     }
     
 }
