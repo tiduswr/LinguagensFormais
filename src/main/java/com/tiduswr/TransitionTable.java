@@ -5,26 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 public class TransitionTable {
-
-    public record Symbol(
-        char symbol
-    ){}
-
-    public record State(
-        int state
-    ){}
-
-    public record Transition(
-        State origin,
-        Set<State> destination
-    ){}
-
-    private Transition newEmptyTransition(State from){
-        return new Transition(from, new HashSet<>());
-    }
 
     private final Map<Symbol, Transition> transitions;
 
@@ -33,14 +14,16 @@ public class TransitionTable {
     }
 
     public void addTransition(Symbol q, State from, State to){
-        transitions.computeIfAbsent(q, k -> newEmptyTransition(from))
-            .destination()
+        transitions.computeIfAbsent(q, k -> new Transition(new HashMap<>()))
+            .transition()
+            .computeIfAbsent(from, j -> new HashSet<>())
             .add(to);
     }
 
     public Set<State> delta(State q, Symbol s){
-        return transitions.getOrDefault(s, newEmptyTransition(q))
-            .destination();
+        return transitions.getOrDefault(s, new Transition(new HashMap<>()))
+            .transition()
+            .getOrDefault(q, new HashSet<>());
     }
     
 }
