@@ -3,25 +3,10 @@ package com.tiduswr;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AFNe implements FiniteAutomata{
-    private TransitionTable table;
-    private State initialState;
-    private Set<State> finalStates;
+public class AFNe extends FiniteAutomata{
 
     public AFNe(TransitionTable table, State initialState, State... finalStates){
-        this.table = table;
-        this.initialState = initialState;
-        this.finalStates = Set.of(finalStates);
-    }
-
-    private void log(int i, String input, State currState){
-        System.out.print("Symbol: ");
-        Util.printCharSublinhado(input, i);
-        System.out.println("   State: " + currState.state());
-    }
-
-    private void log(String s){
-        System.out.println(">> " + s);
+        super(table, initialState, finalStates);
     }
     
     public boolean process(String input){

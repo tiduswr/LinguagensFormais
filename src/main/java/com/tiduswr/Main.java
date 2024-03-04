@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        afdTeste();
+        afneTeste();
     }
 
     public static void afneTeste2(){
