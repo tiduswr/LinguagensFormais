@@ -16,7 +16,7 @@ public abstract class FiniteAutomata {
 
     protected void log(int i, String input, State currState){
         System.out.print("Symbol: ");
-        Util.printCharSublinhado(input, i);
+        Util.printCharDestacado(input, i);
         System.out.println("   State: " + currState.state());
     }
 
