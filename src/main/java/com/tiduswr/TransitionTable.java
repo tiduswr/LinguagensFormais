@@ -7,25 +7,23 @@ import java.util.Set;
 
 public class TransitionTable {
 
-    private final Map<Symbol, Transition> transitions;
+    protected final Map<Symbol, Map<State, Set<State>>> transitions;
 
     public TransitionTable(){
         transitions = new HashMap<>();
     }
 
     public void addTransition(Symbol s, State from, State to){
-        transitions.computeIfAbsent(s, k -> new Transition(new HashMap<>()))
-            .transition()
+        transitions.computeIfAbsent(s, k -> new HashMap<>())
             .computeIfAbsent(from, j -> new HashSet<>())
             .add(to);
     }
 
     public Set<State> delta(State q, Symbol s){
-        return transitions.getOrDefault(s, new Transition(new HashMap<>()))
-            .transition()
+        return transitions.getOrDefault(s, new HashMap<>())
             .getOrDefault(q, new HashSet<>());
     }
-    
+
     public Set<State> fechoEpsilon(State s){
         Set<State> fechoEpsilon = new HashSet<>();
         fechoEpsilon(s, fechoEpsilon, new HashSet<>());
@@ -37,7 +35,7 @@ public class TransitionTable {
         result.add(state);
 
         if(transitions.containsKey(Symbol.VAZIO)){
-            var epsilonTransitions = transitions.get(Symbol.VAZIO).transition();
+            var epsilonTransitions = transitions.get(Symbol.VAZIO);
 
             if(epsilonTransitions.containsKey(state)){
                 for(State nextState : epsilonTransitions.get(state)){

@@ -2,6 +2,7 @@ package com.tiduswr;
 
 import java.util.HashSet;
 import java.util.Set;
+import static com.tiduswr.Util.*;
 
 public class AFNe extends FiniteAutomata{
 
@@ -27,14 +28,14 @@ public class AFNe extends FiniteAutomata{
         Set<State> destinations = new HashSet<>();
         for(State state : currFechoEpsilon){
             Set<State> transitions = table.delta(state, symbol);
-            if(transitions != null){
+            if(!transitions.isEmpty()){
                 destinations.addAll(transitions);
             }
         }
 
         if (destinations.isEmpty()) {
-            log(index, input, currentState);
-            log("Transição não definida!");
+            printState(input, index);
+            printBacktracking();
             return false;
         }
 
@@ -42,12 +43,12 @@ public class AFNe extends FiniteAutomata{
         while (it.hasNext()) {
             var nextState = it.next();
 
-            log(index, input, nextState);    
+            printState(input, index, nextState.state());
             if (process(input, index + 1, nextState, table.fechoEpsilon(nextState))){
                 return true;
             }
             
-            if(it.hasNext()) log("Backtracking...");
+            if(it.hasNext()) printBacktracking();
         }
 
         return false;

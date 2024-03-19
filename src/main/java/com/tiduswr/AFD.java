@@ -1,6 +1,7 @@
 package com.tiduswr;
 
 import java.util.Set;
+import static com.tiduswr.Util.*;
 
 public class AFD extends FiniteAutomata{
 
@@ -21,13 +22,13 @@ public class AFD extends FiniteAutomata{
         Set<State> destinations = table.delta(currentState, symbol);
 
         if (destinations.isEmpty()) {
-            log(index, input, currentState);
-            log("Transição não definida!");
+            printState(input, index, currentState.state());
+            printErro("Transição não definida!");
             return false;
         }
 
         State nextState = destinations.iterator().next();
-        log(index, input, nextState);
+        printState(input, index, nextState.state());
         
         return processRecursive(input, index + 1, nextState);
     }

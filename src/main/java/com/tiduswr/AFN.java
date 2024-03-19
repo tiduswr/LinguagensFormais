@@ -1,6 +1,7 @@
 package com.tiduswr;
 
 import java.util.Set;
+import static com.tiduswr.Util.*;
 
 public class AFN extends FiniteAutomata{
 
@@ -9,10 +10,10 @@ public class AFN extends FiniteAutomata{
     }
     
     public boolean process(String input){
-        return process(input, 0, initialState);
+        return processRecursive(input, 0, initialState);
     }
 
-    private boolean process(String input, int index, State currentState) {
+    private boolean processRecursive(String input, int index, State currentState) {
         if (index == input.length()) {
             return finalStates.contains(currentState);
         }
@@ -21,8 +22,8 @@ public class AFN extends FiniteAutomata{
         Set<State> destinations = table.delta(currentState, symbol);
 
         if (destinations.isEmpty()) {
-            log(index, input, currentState);
-            log("Transição não definida!");
+            printState(input, index);
+            printErro("Transição não definida!");
             return false;
         }
 
@@ -30,12 +31,12 @@ public class AFN extends FiniteAutomata{
         while (it.hasNext()) {
             var nextState = it.next();
 
-            log(index, input, nextState);    
-            if (process(input, index + 1, nextState)){
+            printState(input, index, nextState.state());
+            if (processRecursive(input, index + 1, nextState)){
                 return true;
             }
             
-            if(it.hasNext()) log("Backtracking...");
+            if(it.hasNext()) printBacktracking();
         }
 
         return false;

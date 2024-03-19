@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        afneTeste();
+        afneTeste2();
     }
 
     public static void afneTeste2(){
@@ -36,9 +36,9 @@ public class Main {
         for(int i = 0; i < testes.size(); i++){
             System.out.printf("\nTeste %d\n", i);
             if(afne.process(testes.get(i))){
-                System.out.println(">> Palavra aceita!");
+                Util.printPalavraAceita();
             }else{
-                System.out.println(">> Palavra rejeitada!");
+                Util.printPalavraRejeitada();
             }
         }
     }
@@ -63,9 +63,9 @@ public class Main {
         for(int i = 0; i < testes.size(); i++){
             System.out.printf("\nTeste %d\n", i);
             if(afne.process(testes.get(i))){
-                System.out.println(">> Palavra aceita!");
+                Util.printPalavraAceita();
             }else{
-                System.out.println(">> Palavra rejeitada!");
+                Util.printPalavraRejeitada();
             }
         }
     }
@@ -99,9 +99,9 @@ public class Main {
         for(int i = 0; i < testes.size(); i++){
             System.out.printf("\nTeste %d\n", i);
             if(afn.process(testes.get(i))){
-                System.out.println(">> Palavra aceita!");
+                Util.printPalavraAceita();
             }else{
-                System.out.println(">> Palavra rejeitada!");
+                Util.printPalavraRejeitada();
             }
         }
 
@@ -133,9 +133,9 @@ public class Main {
         for(int i = 0; i < testes.size(); i++){
             System.out.printf("\nTeste %d\n", i);
             if(afd.process(testes.get(i))){
-                System.out.println(">> Palavra aceita!");
+                Util.printPalavraAceita();
             }else{
-                System.out.println(">> Palavra rejeitada!");
+                Util.printPalavraRejeitada();
             }
         }
 

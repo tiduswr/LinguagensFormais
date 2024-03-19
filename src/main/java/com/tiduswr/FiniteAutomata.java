@@ -14,15 +14,6 @@ public abstract class FiniteAutomata {
         this.finalStates = Set.of(finalStates);
     }
 
-    protected void log(int i, String input, State currState){
-        System.out.print("Symbol: ");
-        Util.printCharDestacado(input, i);
-        System.out.println("   State: " + currState.state());
-    }
-
-    protected void log(String s){
-        System.out.println(">> " + s);
-    }
-
     public abstract boolean process(String input);
+    
 }
