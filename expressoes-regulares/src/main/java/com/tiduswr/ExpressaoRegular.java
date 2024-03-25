@@ -1,16 +1,18 @@
 package com.tiduswr;
 
+import lombok.Getter;
+
+@Getter
 public class ExpressaoRegular {
 
-    public String BRANCO, BRANCOS;
-    public String DIGITO, DIGITOS;
-    public String LETRA, LETRAS;
-    public String IDENT;
-    public String EXPONENCIAL;
-    public String REAL;
-    public String INTEIRO;
-    public String NUMEROS;
-    public String ATRIBUICAO;    
+    private final String BRANCO, BRANCOS;
+    private final String DIGITO, DIGITOS;
+    private final String LETRA, LETRAS;
+    private final String IDENT;
+    private final String EXPONENCIAL;
+    private final String REAL;
+    private final String INTEIRO;
+    private final String NUMEROS;    
     
     public ExpressaoRegular() {
         BRANCO = "(\\s)";
@@ -23,9 +25,7 @@ public class ExpressaoRegular {
         EXPONENCIAL = "(E(\\+|-)" + DIGITOS + ")";
         REAL = "(\\-?" + DIGITOS + "\\.?" + DIGITOS + EXPONENCIAL+")";
         INTEIRO = "(" + DIGITOS + EXPONENCIAL + "?)";
-        NUMEROS = "(" + INTEIRO + "|" + REAL + ")";
-
-        ATRIBUICAO = IDENT + BRANCOS + "=" + BRANCOS + REAL;           
+        NUMEROS = "(" + INTEIRO + "|" + REAL + ")";         
     }
 
     public void confere(String exp, String sentenca) {
