@@ -9,7 +9,6 @@ public class ExpressaoRegular {
     private final String DIGITO, DIGITOS;
     private final String LETRA, LETRAS;
     private final String IDENT;
-    private final String EXPONENCIAL;
     private final String REAL;
     private final String INTEIRO;
     private final String NUMEROS;    
@@ -22,9 +21,8 @@ public class ExpressaoRegular {
         LETRA = "([A-Za-z])";
         LETRAS = LETRA + "*";
         IDENT = "(" + LETRA + "(" + LETRA + "|" + DIGITO + ")*)";
-        EXPONENCIAL = "(E(\\+|-)" + DIGITOS + ")";
-        REAL = "(\\-?" + DIGITOS + "\\.?" + DIGITOS + EXPONENCIAL+")";
-        INTEIRO = "(" + DIGITOS + EXPONENCIAL + "?)";
+        REAL = "\\-?" + DIGITOS + "\\.?" + DIGITOS;
+        INTEIRO = "\\-?" + DIGITOS ;
         NUMEROS = "(" + INTEIRO + "|" + REAL + ")";         
     }
 
@@ -39,6 +37,5 @@ public class ExpressaoRegular {
             System.err.println("Sentença vazia.");
         }
     }
-
-
+    
 }

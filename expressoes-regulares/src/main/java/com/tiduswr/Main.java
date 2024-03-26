@@ -5,7 +5,7 @@ public class Main {
         ExpressaoRegular ER = new ExpressaoRegular();
 
         //Teste 1, expressão regular: DIGITOS
-        ER.confere(ER.getDIGITO(), "000511200021");
+        ER.confere(ER.getDIGITOS(), "000511200021");
         
         //Teste 2, expressão regular: DIGITOS
         ER.confere(ER.getDIGITOS(), "000511200021ADAF");
@@ -23,11 +23,15 @@ public class Main {
         ER.confere(ER.getIDENT(), "1Altura");
         
         //Teste 7, expressão regular: REAL
-        ER.confere(ER.getREAL(), "123.908777E+30");
+        ER.confere(ER.getREAL(), "-123.908777");
         
         //Teste 8, expressão regular: REAL
-        ER.confere(ER.getREAL(), "0.17E-5");
+        ER.confere(ER.getREAL(), "0.17");
         
+        //Teste 9, expressão regular: INTEIRO
         ER.confere(ER.getINTEIRO(), "10");
+
+        //Teste 10, expressão regular: INTEIRO
+        ER.confere(ER.getINTEIRO(), "-10");
     }
 }
