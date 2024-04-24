@@ -37,15 +37,14 @@ for(w of palavras){
 # Teste de tipos de palavras
 ```js
 const regex = {
-  BRANCO: /^\s$/,
   BRANCOS: /^\s*$/,
-  DIGITO: /^[0-9]$/,
   DIGITOS: /^[0-9]+$/,
-  LETRA: /^[A-Za-z]$/,
   LETRAS: /^[A-Za-z]+$/,
+  FRASE: /^([A-Za-z,!]+(\s?))*$/,
   IDENT: /^[A-Za-z]([A-Za-z]|[0-9])*$/,
   REAL: /^\-?[0-9]+\.[0-9]+$/,
   INTEIRO: /^\-?[0-9]+$/,
+  CPF: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
 };
 
 const confere = (padrao, sentenca) => {
@@ -56,11 +55,19 @@ const confere = (padrao, sentenca) => {
   );
 };
 
+confere(regex.BRANCOS, " \n\t"); // Deve ser aceito
+confere(regex.BRANCOS, " "); // Deve ser aceito
+confere(regex.BRANCOS, " 000"); // Deve ser rejeitado
+
 confere(regex.DIGITOS, "000511200021"); // Deve ser aceito
 confere(regex.DIGITOS, "000511200021ADAF"); // Deve ser rejeitado
 
 confere(regex.LETRAS, "ASDFEAFdafsafdsf"); // Deve ser aceito
 confere(regex.LETRAS, "ASDFEAFdafsafdsf4565"); // Deve ser rejeitado
+
+confere(regex.FRASE, "Ola mundo, que bom te ver!"); // Deve ser aceito
+confere(regex.FRASE, "ASDFEAFdafsafdsf4565"); // Deve ser rejeitado
+confere(regex.FRASE, "Ola  mundo"); // Deve ser rejeitado
 
 confere(regex.IDENT, "Altura1"); // Deve ser aceito
 confere(regex.IDENT, "1Altura"); // Deve ser rejeitado
@@ -72,6 +79,12 @@ confere(regex.REAL, "0."); // Deve ser rejeitado
 confere(regex.INTEIRO, "10"); // Deve ser aceito
 confere(regex.INTEIRO, "-10"); // Deve ser aceito
 confere(regex.INTEIRO, "-1a0"); // Deve ser rejeitado
+
+confere(regex.CPF, "123.456.789-10"); // Deve ser aceito
+confere(regex.CPF, "019.876.543-21"); // Deve ser aceito
+confere(regex.CPF, "12345678910"); // Deve ser aceito
+confere(regex.CPF, "2312312"); // Deve ser rejeitado
+confere(regex.CPF, "fsdafsaf"); // Deve ser rejeitado
 ```
 
 # Groups
